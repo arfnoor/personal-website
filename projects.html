@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects · Adam Noor</title>
+  <meta name="description" content="Projects by Adam Noor, a software developer.">
+  <script>document.documentElement.classList.add("js");</script>
+  <link rel="stylesheet" href="style.css">
+  <script src="main.js" defer></script>
+  <script src="phone-demo.js" type="module"></script>
+</head>
+<body>
+  <header class="site-header">
+    <a href="index.html">Adam Noor</a>
+    <nav aria-label="Primary">
+      <a href="index.html">About</a>
+      <a href="experience.html">Experience</a>
+      <a href="projects.html" aria-current="page">Projects</a>
+    </nav>
+  </header>
+
+  <div class="progress" aria-hidden="true"><span id="progress-current">1</span> / <span id="progress-total">3</span></div>
+
+  <main>
+    <!-- Project 1: mobile app with a live phone demo.
+         data-demo="todo" loads demos/todo/demo.js (a sample you can replace). -->
+    <section class="section" aria-labelledby="project-1">
+      <div class="section-inner project-grid">
+        <div class="project-text">
+          <p class="muted small reveal" style="--i:0">Mobile app · 2025</p>
+          <h2 id="project-1" class="reveal" style="--i:1">Project One</h2>
+          <p class="reveal" style="--i:2">A short description: what it does, who it is for, and the interesting problem you solved. Try the demo on the right.</p>
+          <ul class="tags reveal" style="--i:3"><li>Swift</li><li>SwiftUI</li><li>Core Data</li></ul>
+          <p class="reveal" style="--i:4"><a href="https://github.com/your-username/project-one">Source code</a></p>
+        </div>
+        <div class="project-media reveal" style="--i:2">
+          <div class="phone" role="group" aria-label="Interactive demo of Project One">
+            <div class="phone-screen" data-demo="recipedia">
+              <div class="phone-viewport"></div>
+              <div class="phone-placeholder">Loading demo…</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project 2: a project with a regular image instead of a phone. -->
+    <section class="section" aria-labelledby="project-2">
+      <div class="section-inner project-grid flip">
+        <div class="project-text">
+          <p class="muted small reveal" style="--i:0">Web app · 2024</p>
+          <h2 id="project-2" class="reveal" style="--i:1">Project Two</h2>
+          <p class="reveal" style="--i:2">A short description of this project and what you learned building it.</p>
+          <ul class="tags reveal" style="--i:3"><li>TypeScript</li><li>React</li><li>PostgreSQL</li></ul>
+          <p class="reveal" style="--i:4"><a href="https://github.com/your-username/project-two">Source code</a> · <a href="https://example.com">Live site</a></p>
+        </div>
+        <div class="project-media reveal" style="--i:2">
+          <!-- Replace the text with: <img src="images/project-two.png" alt="Describe the screenshot"> -->
+          <div class="media-frame">Screenshot goes here</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project 3: second phone, demo not built yet (no data-demo attribute). -->
+    <section class="section" aria-labelledby="project-3">
+      <div class="section-inner project-grid">
+        <div class="project-text">
+          <p class="muted small reveal" style="--i:0">Mobile app · 2023</p>
+          <h2 id="project-3" class="reveal" style="--i:1">Project Three</h2>
+          <p class="reveal" style="--i:2">Another mobile project. Once you add a demo, set data-demo on the phone screen below and it will appear here.</p>
+          <ul class="tags reveal" style="--i:3"><li>Kotlin</li><li>Jetpack Compose</li><li>Room</li></ul>
+          <p class="reveal" style="--i:4"><a href="https://github.com/your-username/project-three">Source code</a></p>
+        </div>
+        <div class="project-media reveal" style="--i:2">
+          <div class="phone" role="group" aria-label="Demo placeholder for Project Three">
+            <div class="phone-screen">
+              <div class="phone-viewport"></div>
+              <div class="phone-placeholder">Demo coming soon</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

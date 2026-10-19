@@ -1,0 +1,422 @@
+/* Personal site: plain, system fonts, one neutral palette.
+   Change the variables below to restyle the whole site. */
+
+:root {
+  --bg: #fcfcfa;
+  --fg: #1b1b1a;
+  --muted: #6a6a64;
+  --rule: #d8d8d2;
+  --font: "Iowan Old Style", "Charter", "Palatino Linotype", Georgia, serif;
+  --pad: clamp(1.25rem, 5vw, 4rem);
+  --ease: cubic-bezier(0.2, 0.6, 0.2, 1);
+
+  /* 1vh with a dynamic-viewport upgrade where supported (mobile browser bars) */
+  --vh: 1vh;
+  --phone-h: calc(var(--vh) * 72);
+}
+
+@supports (height: 1dvh) {
+  :root {
+    --vh: 1dvh;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+h2 {
+  font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+}
+
+h3 {
+  font-size: 1.15rem;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.small {
+  font-size: 0.95rem;
+}
+
+/* ---------- Header and progress ---------- */
+
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1.25rem var(--pad);
+  background: var(--bg);
+  font-size: 1rem;
+}
+
+.site-header a {
+  text-decoration: none;
+}
+
+.site-header nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.site-header nav a:hover,
+.site-header nav a[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+}
+
+.progress {
+  position: fixed;
+  left: var(--pad);
+  bottom: 1.25rem;
+  z-index: 10;
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Sections: one thing per screen ---------- */
+
+.section {
+  min-height: calc(var(--vh) * 100);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5.5rem var(--pad) 4rem;
+}
+
+.section-inner {
+  width: 100%;
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.prose {
+  max-width: 38rem;
+}
+
+.links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+}
+
+/* ---------- Transition animation ----------
+   main.js adds .is-active to the section crossing the middle of the screen.
+   Content fades and slides in with a small stagger (--i), and leaves quickly. */
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+  transition-delay: 0ms;
+}
+
+.js .section.is-active .reveal {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.7s var(--ease);
+  transition-delay: calc(var(--i, 0) * 90ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .js .reveal,
+  .js .section.is-active .reveal {
+    transform: none;
+    transition-duration: 0.01ms;
+    transition-delay: 0ms;
+  }
+}
+
+/* ---------- Entries (education, experience, skills) ---------- */
+
+.entries {
+  list-style: none;
+  margin: 2.5rem 0 0;
+  padding: 0;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.entry:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.entry p {
+  margin: 0.25rem 0 0;
+}
+
+.entry ul {
+  margin: 0.75rem 0 0;
+  padding-left: 1.2rem;
+}
+
+.entry li + li {
+  margin-top: 0.35rem;
+}
+
+.entry-when {
+  color: var(--muted);
+  font-size: 0.95rem;
+  padding-top: 0.2rem;
+}
+
+/* ---------- Projects ---------- */
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
+}
+
+.project-grid.flip .project-media {
+  order: -1;
+}
+
+.project-text h2 {
+  margin-bottom: 1rem;
+}
+
+.tags {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.tags li {
+  display: inline;
+}
+
+.tags li + li::before {
+  content: " \00b7  ";
+}
+
+.project-media {
+  display: flex;
+  justify-content: center;
+}
+
+.media-frame {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border: 1px solid var(--rule);
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  font-size: 0.95rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+.media-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ---------- Phone frame ----------
+   The screen is a fixed 390x844 "logical" viewport that phone-demo.js scales
+   to fit, so app code written for a normal phone size renders correctly. */
+
+.phone {
+  --bezel: 10px;
+  width: min(300px, 70vw, calc((var(--phone-h) - 20px) * 390 / 844 + 20px));
+  padding: var(--bezel);
+  background: var(--fg);
+  border-radius: 40px;
+}
+
+.phone-screen {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 390 / 844;
+  overflow: hidden;
+  border-radius: 30px;
+  background: #fff;
+}
+
+/* Small camera pill; remove if your app draws its own status bar */
+.phone-screen::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 84px;
+  height: 24px;
+  margin-left: -42px;
+  border-radius: 12px;
+  background: var(--fg);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.phone-viewport {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 390px;
+  height: 844px;
+  transform-origin: 0 0;
+  transform: scale(var(--scale, 0.7));
+  overflow: hidden;
+}
+
+.phone-placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  text-align: center;
+  background: #f3f3f0;
+  color: var(--muted);
+  font: 0.9rem/1.4 system-ui, sans-serif;
+}
+
+/* Text on the left, image on the right */
+.split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
+}
+
+.split-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: calc(var(--vh) * 60);
+  object-fit: cover;
+}
+
+/* Optional: add "flip" to put the image on the left */
+.split.flip .split-media {
+  order: -1;
+}
+
+/* Stack on small screens, image below the text */
+@media (max-width: 800px) {
+  .split {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+
+  .split.flip .split-media {
+    order: 0;
+  }
+}
+
+/* ---------- Small screens ---------- */
+
+@media (max-width: 800px) {
+  :root {
+    --phone-h: calc(var(--vh) * 46);
+  }
+
+  html {
+    scroll-snap-type: y proximity;
+  }
+
+  .section {
+    scroll-snap-stop: normal;
+    padding-top: 5rem;
+  }
+
+  .project-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+
+  .project-grid.flip .project-media {
+    order: 0;
+  }
+
+  .site-header nav {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .entry {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+}
