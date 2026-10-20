@@ -14,7 +14,7 @@ const screens = Array.from(document.querySelectorAll(".phone-screen"));
 
 screens.forEach((screen) => {
   const viewport = screen.querySelector(".phone-viewport");
-  const fit = () => viewport.style.setProperty("--scale", String(screen.clientWidth / BASE_WIDTH));
+  const fit = () => screen.style.setProperty("--scale", String(screen.clientWidth / BASE_WIDTH));
   fit();
   new ResizeObserver(fit).observe(screen);
 });
@@ -27,7 +27,10 @@ async function loadDemo(screen) {
 
   try {
     const demo = await import(`./demos/${name}/demo.js`);
-    demo.mount(screen.querySelector(".phone-viewport"));
+    const host = document.createElement("div");
+    host.style.cssText = "position:absolute;inset:0;overflow:hidden";
+    screen.querySelector(".phone-viewport").append(host);
+    demo.mount(host);
     if (placeholder) placeholder.remove();
   } catch (error) {
     console.warn(`Could not load demo "${name}":`, error);
