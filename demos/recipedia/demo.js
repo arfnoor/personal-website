@@ -1,7 +1,7 @@
 // Recipedia — visual-only demo. Designed for a 390x844 phone screen.
 
 const ROOT_CLASS = "demo-recipedia";
-const FOOD_IMG = new URL("./recipedia/assets/alfredo.jpg", import.meta.url).href;
+const FOOD_IMG = new URL("./assets/alfredo.jpg", import.meta.url).href;
 
 // ───────────────────────── Sample data ─────────────────────────
 const RECIPES = [
