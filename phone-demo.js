@@ -10,11 +10,12 @@
 //   export function mount(root) { ...render the app into root...; return optionalCleanup; }
 
 const BASE_WIDTH = 390;
-const screens = Array.from(document.querySelectorAll(".phone-screen"));
+const screens = Array.from(document.querySelectorAll(".phone-screen, .demo-frame"));
 
 screens.forEach((screen) => {
-  const viewport = screen.querySelector(".phone-viewport");
-  const fit = () => screen.style.setProperty("--scale", String(screen.clientWidth / BASE_WIDTH));
+  const viewport = screen.querySelector(".phone-viewport, .demo-viewport");
+  const base = Number(screen.dataset.baseWidth) || 390;
+  const fit = () => screen.style.setProperty("--scale", String(screen.clientWidth / base));
   fit();
   new ResizeObserver(fit).observe(screen);
 });

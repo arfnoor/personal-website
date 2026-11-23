@@ -438,3 +438,23 @@ p {
     gap: 0.25rem;
   }
 }
+
+.demo-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  background: var(--bg);
+}
+
+.demo-viewport {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 640px;
+  height: 400px;
+  transform-origin: 0 0;
+  transform: scale(var(--scale, 0.7));
+  overflow: hidden;
+}
